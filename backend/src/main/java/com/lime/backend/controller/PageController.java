@@ -30,4 +30,13 @@ public class PageController {
         return pageService.addNewPage(newPage);
     }
 
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updatePage(@PathVariable Integer id, @RequestBody PageDTO updatedPage) {
+        try {
+            return pageService.updatePage(id, updatedPage);
+        } catch (Exception e) {
+            return ResponseEntity.status(404).body("Erro ao atualizar a página: " + e.getMessage());
+        }
+    }
 }

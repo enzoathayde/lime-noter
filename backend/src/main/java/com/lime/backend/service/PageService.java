@@ -27,4 +27,18 @@ public class PageService {
         return ResponseEntity.ok().build();
     }
 
+    public ResponseEntity<?> updatePage(Integer id, PageDTO updatedPage) {
+        // Verifique se a página existe
+        Page existingPage = pageRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Página não encontrada com ID: " + id));
+
+        // Atualize os campos necessários
+        existingPage.setTitle(updatedPage.title());
+        existingPage.setContent(updatedPage.content());
+
+        // Salve a página atualizada no banco
+        pageRepository.save(existingPage);
+        return ResponseEntity.ok("Página atualizada com sucesso!");
+    }
+
 }
