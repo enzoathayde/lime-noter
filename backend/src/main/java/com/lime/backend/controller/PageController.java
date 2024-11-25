@@ -39,4 +39,13 @@ public class PageController {
             return ResponseEntity.status(404).body("Erro ao atualizar a página: " + e.getMessage());
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePage(@PathVariable Integer id) {
+        try {
+            return pageService.deletePage(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

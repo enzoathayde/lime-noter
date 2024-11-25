@@ -39,4 +39,13 @@ public class PageService {
         return ResponseEntity.ok("Página atualizada com sucesso!");
     }
 
+    public ResponseEntity<?> deletePage(Integer id) {
+
+        Page existingPage = pageRepository.findById(id).orElseThrow(() -> new RuntimeException("Não encontrado!"));
+
+        pageRepository.delete(existingPage);
+
+        return ResponseEntity.ok("Página deletada com sucesso");
+    }
+
 }
